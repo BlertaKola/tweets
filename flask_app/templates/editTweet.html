@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Twitter</title>
+</head>
+<body>
+    
+    <div class="d-flex justify-content-between p-5 align-items-center">
+        <h1>Welcome <span class="text-success">{{loggedUser.first_name}}</span> </h1>
+        <div>
+            <a class="btn btn-primary" href="/dashboard">Dashboard</a>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <div class="col-6 d-flex m-auto justify-content-center border border-1 p-5">
+        <form action="/editTweet" method="post">
+            <h1 class="text-primary">Update a Tweet</h1>
+            <div>
+                <label for="content">Content</label>
+                <textarea class="form-control" name="content" cols="30" rows="2"> {{tweets.content}} </textarea>
+            </div> 
+            {% with messages = get_flashed_messages(category_filter=["contentUpdate"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}   
+            <button type="submit" class="btn btn-success mt-4">Update Tweet</button>
+        </form>
+    </div>
+    
+
+</body>
+</html>
